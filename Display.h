@@ -22,10 +22,10 @@ public:
 	static void showHelp();
 
 	void skipStory(const string& prompt);
+	void pressEnter();
 	void intro();
 
 private:
 	bool skipStory_;
 	void tempoMessage(const string& message, int delayMs);
-	void pressEnter();
 };

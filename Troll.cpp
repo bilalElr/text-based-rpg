@@ -19,7 +19,7 @@ void Troll::atk1(Character& c)
 
 void Troll::atk2(Character& c)
 {
-	c.takeDamage(50);
+	c.takeDamage(55);
 }
 
 int Troll::getAtk1() const

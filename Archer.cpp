@@ -5,7 +5,6 @@ using namespace std;
 Archer::Archer() :
 Character("Archer", 400, 400, 20, 30, 0, 1, 2)
 {
-	cout << endl << getType() << " has appeared!" << endl;
 	lightCooldown_ = 1;
 	heavyCooldown_ = 2;
 }

@@ -75,8 +75,8 @@ void Display::tempoMessage(const string& message, int delayMs)
 
 void Display::pressEnter()
 {
+	cout << "\n[press enter to continue]\n" << flush;
 	string urmom;
-	cout << "\n[press enter to continue]\n";
 	getline(cin, urmom);
 }
 
@@ -111,10 +111,15 @@ void Display::intro()
 	tempoMessage("A long time ago in a galaxy far, far away....", 2000);
 	tempoMessage("jk this isn't star wars", 2000);
 	tempoMessage("In a once peaceful and prosperous land called Kaer Morhen,", 3000);
-	tempoMessage("There lived a very happy community of honest, hard working farmers.", 3000);
+	tempoMessage("There lived a very happy community of honest, hard working people.", 3000);
 	tempoMessage("The economy was thriving, the younger generations were hopeful, and the people were as strong as ever.", 4000);
 	tempoMessage("Unfortunately, good things can never last", 2000);
 	tempoMessage("It is when everyone was least expecting it that everything started to go wrong...", 3000);
-	cout << "scoobylimgze";
-	cout << "chimse";
+	tempoMessage("Nobody knows why or how monsters started appearing near the villages, destroying everything on their path...", 4000);
+	tempoMessage("And that is why the king of these lands has gathered the three bravest warriors he could find.", 3000);
+	tempoMessage("A knight, master of the heavy arms, capable of inflicting serious damage with his weapon swings.", 3000);
+	tempoMessage("An archer, capable of shooting piercing arrows at dizzying speeds.", 3000);
+	tempoMessage("And a mage, casting spells dangerous to foes and friendly to allies.", 3000);
+	cout << "Together, they will save the people of Kaer Morhen and restore the peace this land once lived under.";
+	pressEnter();
 }

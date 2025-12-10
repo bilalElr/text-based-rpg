@@ -51,7 +51,8 @@ Entity::Entity(const string& type, int health, int maxHealth) :
     type_(type),
     health_(health),
     maxHealth_(maxHealth),
-    isAlive_(true)
+    isAlive_(true),
+    isDazed_(false)
 {
     nEntities_++;
 }

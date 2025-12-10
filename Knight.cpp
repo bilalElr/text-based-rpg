@@ -5,7 +5,6 @@ using namespace std;
 Knight::Knight():
 	Character("Knight", 500, 500, 35, 45, 80, 2, 5)
 {
-	cout << endl << getType() << " has appeared!" << endl;
 	lightCooldown_ = 2;
 	heavyCooldown_ = 5;
 }

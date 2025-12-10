@@ -22,15 +22,19 @@ Commands commands(display, party, enemy);
 
 int main() {
 	
+	cout << "(You can type 'help' at any time during a battle to see the available commands)\n";
+	cout << "Please do not hit the enter key unless you're asked to otherwise it skips a lot of stuff.\n"
+		<< "I tried dealing with it but nothing worked. So just one enter at a time, thanks :)\n";
 	display.intro();
+	cout << "You're out on your first expedition when you see a goblin eating the remains of what seems to be a mangled corpse.\n";
+	cout << "Excited to finally get some monster blood on your hands, you make your presence known to him.\n";
+	cout << "Despite being a lone goblin, he will not go down without a fight.\n";
+	display.pressEnter();
 
-	cout << "intro skipped";
-
-	BattleManager bim(party, enemy);
-	bim.startParty();
-	bim.startEnemies({ {"Goblin", 1} });
-	bim.battle();
-	cout << "\nmade it to the end of main\n";
+	BattleManager bm(party, enemy);
+	bm.startParty();
+	bm.startEnemies({ {"Goblin", 1} });
+	bm.battle();
 
 	return 0;
 }

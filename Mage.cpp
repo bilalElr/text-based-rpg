@@ -7,7 +7,6 @@ using namespace std;
 Mage::Mage():
 	Character("Mage", 300, 300, 15, 25, 0, 1, 3)
 {
-	cout << endl << getType() << " has appeared!" << endl;
 	lightCooldown_ = 1;
 	heavyCooldown_ = 3;
 }
