@@ -115,4 +115,5 @@ void Display::intro()
 	tempoMessage("The economy was thriving, the younger generations were hopeful, and the people were as strong as ever.", 4000);
 	tempoMessage("Unfortunately, good things can never last", 2000);
 	tempoMessage("It is when everyone was least expecting it that everything started to go wrong...", 3000);
+	cout << "scoobylimgze";
 }
