@@ -52,3 +52,8 @@ string Archer::getUltDescription() const
 {
 	return "The ult will shoot an arrow that deals 100 damage and will inflict bleeding for 5 turns\n";
 }
+
+//unique_ptr<Character> Archer::clone() const
+//{
+//	return make_unique<Archer>(*this);
+//}

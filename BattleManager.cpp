@@ -353,3 +353,21 @@ bool BattleManager::allCharactersDead() const
     }
     return true;
 }
+
+void BattleManager::healParty(int amount)
+{
+    for (unique_ptr<Character>& c : party_) {
+        c->setHealth(c->getHealth() + amount);
+    }
+}
+
+//vector<unique_ptr<Character>> BattleManager::makeCheckpoint(vector<unique_ptr<Character>>& currentParty)
+//{
+//    vector<unique_ptr<Character>> checkpoint;
+//    checkpoint.reserve(currentParty.size());
+//
+//    for (unique_ptr<Character>& c : currentParty) {
+//        checkpoint.push_back(c->clone());
+//    }
+//    return checkpoint;
+//}

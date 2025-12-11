@@ -52,3 +52,8 @@ string Knight::getUltDescription() const
 {
 	return "The ult will deal 80 damage and daze the enemy for the next 5 turns\n";
 }
+
+//unique_ptr<Character> Knight::clone() const
+//{
+//	return make_unique<Knight>(*this);
+//}

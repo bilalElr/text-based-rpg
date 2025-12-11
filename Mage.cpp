@@ -137,3 +137,8 @@ void Mage::heal(Character& target, int amount)
 	cout << target.getType() << " now has " << newHP << " HP!" << endl;
 }
 
+//unique_ptr<Character> Mage::clone() const
+//{
+//	return make_unique<Mage>(*this);
+//}
+

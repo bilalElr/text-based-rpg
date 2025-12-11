@@ -28,6 +28,11 @@ public:
 	void startEnemies(const vector<pair<string, int>>& enemiesToSpawn);
 
 	void battle();
+	bool battleOver() const;
+	bool allCharactersDead() const;
+	void healParty(int amount);
+
+	//vector<unique_ptr<Character>> makeCheckpoint(vector<unique_ptr<Character>>& currentParty);
 
 	const vector<unique_ptr<Character>>& getParty() const;
 	const vector<unique_ptr<Enemy>>& getEnemyParty() const;
@@ -50,10 +55,8 @@ private:
 	void executePlayerAttack(Character* activeChar, Enemy* target, int attackChoice);
 	void removeDeadEnemies();
 	void enemyAttack(Enemy* e, Character* c);
-	
-	bool battleOver() const;
+
 	bool allEnemiesDead() const;
-	bool allCharactersDead() const;
 
 private:
 	vector<unique_ptr<Character>>& party_;

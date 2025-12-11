@@ -17,6 +17,7 @@ public:
 		int light, int heavy, int ult,
 		int lightCool, int heavyCool);
 	virtual ~Character();
+	//virtual unique_ptr<Character> clone() const = 0;
 
 	virtual int getLightDmg() const = 0;
 	virtual int getHeavyDmg() const = 0;

@@ -14,7 +14,6 @@ public:
 	Mage();
 	void ultimate(Enemy& e, vector<unique_ptr<Character>>& p) override;
 	
-	//void ultimate(vector<unique_ptr<Character>>& party);
 	void light(Enemy& e) override;
 	void heavy(Enemy& e) override;
 	
@@ -24,4 +23,6 @@ public:
 	string getUltDescription() const override;
 
 	void heal(Character& target, int amount);
+
+	//unique_ptr<Character> clone() const override;
 };
