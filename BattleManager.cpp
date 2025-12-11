@@ -303,6 +303,7 @@ void BattleManager::battle()
     turnCounter_ = 1;
     for (unique_ptr<Character>& c : party_) {
         c->setCooldownsToZero();
+        c->setUltUsed(false);
     }
 
     while (true) {

@@ -68,6 +68,11 @@ void Character::setCooldownsToZero()
     heavyCooldownRemaining_ = 0;
 }
 
+void Character::setUltUsed(bool status)
+{
+    ultUsed_ = status;
+}
+
 void Character::decrementCooldown()
 {
     if (lightCooldownRemaining_ > 0) lightCooldownRemaining_--;

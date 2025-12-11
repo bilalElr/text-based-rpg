@@ -37,6 +37,7 @@ public:
 	void resetLightCooldown();
 	void resetHeavyCooldown();
 	void setCooldownsToZero();
+	void setUltUsed(bool status);
 
 	void decrementCooldown();
 
