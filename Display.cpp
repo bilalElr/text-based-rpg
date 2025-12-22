@@ -13,8 +13,8 @@ void Display::showCharacterDetails(const Character& c)
 
 	cout << "Character type: " << c.getType() << endl
 		<< "Character health: " <<  c.getHealth() << "/" << c.getMaxHealth() << " HP." << endl
-		<< "Light attacks deal " << c.getLightDmg() << " damage and can be used every " << c.getLightCool() << " turn(s)."
-		<< "Heavy attacks deal " << c.getHeavyDmg() << " damage and can be used every " << c.getHeavyCool() << " turn(s)."
+		<< "Light attacks deal " << c.getLightDmg() << " damage and can be used every " << c.getLightCool() << " turn(s). "
+		<< "Heavy attacks deal " << c.getHeavyDmg() << " damage and can be used every " << c.getHeavyCool() << " turn(s). "
 		<< c.getUltDescription()
 	    << "Status: " << c.getDebuff() << endl;
 	cout << "===========================================================\n";
@@ -28,6 +28,7 @@ void Display::showEnemyDetails(const Enemy& e)
 		<< "Enemy health: " << e.getHealth() << "/" << e.getMaxHealth() << " HP." << endl
 		<< "Light attack (" << e.getAttack1() << ") deals " << e.getAtk1() << " damage." << endl
 		<< "Heavy attack (" << e.getAttack2() << ") deals " << e.getAtk2() << " damage." << endl
+		<< "Ultimate attack (" << e.getUltDesc() << ") deals " << e.getEnemyUlt() << " damage and inflicts petrify." << endl
 		<< "Status: " << e.getDebuff() << endl;
 	cout << "===========================================================\n";
 }
@@ -62,6 +63,7 @@ void Display::showHelp()
 	cout << "  <enemy> help         - Show details about a specific enemy\n";
 	cout << "\nStatus effects:\n";
 	cout << "  bleeding             - Lose 20HP per turn\n";
+	cout << "  petrified			- Character is petrified and cannot be used.\n";
 	cout << "  dazed                - Increased chance to miss attacks\n";
 	cout << "  dodge                - 10% chance to dodge attacks (except ults) and unable to dodge\n";
 	cout << "=========================================================\n";

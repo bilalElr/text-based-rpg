@@ -16,8 +16,9 @@ void Knight::light(Enemy& e)
 
 void Knight::heavy(Enemy& e)
 {
+	int currentHealth = e.getHealth();
 	e.takeDamage(45);
-	if (randomNumberGenerator(1, 100) <= 30) {
+	if ((randomNumberGenerator(1, 100) <= 30) && currentHealth != e.getHealth()) {
 		e.applyDebuff(Debuff::Dazed, 2);
 		cout << "Heavy attack inflicted daze for 2 turns!\n";
 	}

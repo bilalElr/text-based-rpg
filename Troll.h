@@ -20,6 +20,10 @@ public:
 	string getAttack2() const override;
 	int getUltDmg() const;
 
+	int getEnemyUlt() const override;
+	string getUltDesc() const override;
+	void enemyUlt(Character& c) override;
+
 private:
 	int ultDmg_;
 };

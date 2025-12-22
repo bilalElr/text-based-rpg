@@ -12,6 +12,7 @@ class Mage : public Character
 public:
 
 	Mage();
+	//Mage(const Mage& copy) = default;
 	void ultimate(Enemy& e, vector<unique_ptr<Character>>& p) override;
 	
 	void light(Enemy& e) override;

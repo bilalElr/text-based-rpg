@@ -207,22 +207,30 @@ int BattleManager::getPlayerAttackChoice(Character* c, int turnCounter)
     }
 }
 
-bool BattleManager::attickWillHit(Entity* attacker, Entity* target)
+bool BattleManager::attackCharWillHit(Character* attacker)
 {
-    int hitChance = 100;
     for (const Debuff& d : attacker->getDebuffs()) {
         if (d.type == Debuff::Dazed) {
-            hitChance /= 2;
-            break;
+            return randomNumberGenerator(1, 100) <= 50;
         }
     }
-    return randomNumberGenerator(1, 100) <= hitChance;
+    return true;
+}
+
+bool BattleManager::attackEnemyCharWillHit(Enemy* enemy)
+{
+    for (const Debuff& d : enemy->getDebuffs()) {
+        if (d.type == Debuff::Dazed) {
+            return randomNumberGenerator(1, 100) <= 50;
+        }
+    }
+    return true;
 }
 
 void BattleManager::executePlayerAttack(Character* attacker, Enemy* target, int attackChoice)
 {
     cout << "\n===== PLAYER ATTACK SUMMARY =====\n";
-    if (!attickWillHit(attacker, target)) {
+    if (!attackCharWillHit(attacker)) {
         cout << attacker->getType() << " 's attack missed!\n";
         return;
     }
@@ -263,14 +271,36 @@ void BattleManager::removeDeadEnemies()
 
 void BattleManager::enemyAttack(Enemy* e, Character* c)
 {
-    if (randomNumberGenerator(1, 100) <= 70) {
-        cout << c->getType() << " has been attacked by: " << e->getType() << "!\n";
-        e->atk1(*c);
+    if (!attackEnemyCharWillHit(e)) {
+        cout << e->getType() << "'s attack missed!\n";
+        return;
     }
-    else {
-        cout << c->getType() << " has been attacked by: " << e->getType() << "!\n";
-        e->atk2(*c);
-    }
+
+     if (turnCounter_ < 5 || e->getUltUsed()) {
+         if (randomNumberGenerator(1, 100) <= 70) {
+             cout << c->getType() << " has been attacked by: " << e->getType() << "!\n";
+             e->atk1(*c);
+         }
+         else {
+             cout << c->getType() << " has been attacked by: " << e->getType() << "!\n";
+             e->atk2(*c);
+         }
+     }
+     else {
+        int attack = randomNumberGenerator(1, 100);
+         if (attack <= 15) {
+            cout << e->getType() << " used their ult attack!\n";
+            e->enemyUlt(*c);
+         }
+         else if (attack > 15 && attack <= 70) {
+             cout << c->getType() << " has been attacked by: " << e->getType() << "!\n";
+             e->atk1(*c);
+         }
+         else {
+             cout << c->getType() << " has been attacked by: " << e->getType() << "!\n";
+             e->atk2(*c);
+         }
+     } 
 }
 
 void BattleManager::enemyTurn()
@@ -359,15 +389,18 @@ void BattleManager::healParty(int amount)
 {
     for (unique_ptr<Character>& c : party_) {
         c->setHealth(c->getHealth() + amount);
+        if (c->getHealth() > c->getMaxHealth()) {
+            c->setHealth(c->getMaxHealth());
+        }
     }
 }
 
-//vector<unique_ptr<Character>> BattleManager::makeCheckpoint(vector<unique_ptr<Character>>& currentParty)
+//vector<unique_ptr<Character>> BattleManager::makeCheckpoint(const vector<unique_ptr<Character>>& currentParty)
 //{
 //    vector<unique_ptr<Character>> checkpoint;
 //    checkpoint.reserve(currentParty.size());
 //
-//    for (unique_ptr<Character>& c : currentParty) {
+//    for (const unique_ptr<Character>& c : currentParty) {
 //        checkpoint.push_back(c->clone());
 //    }
 //    return checkpoint;

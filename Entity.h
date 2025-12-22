@@ -8,7 +8,7 @@
 using namespace std;
 
 struct Debuff {
-	enum Type { Dazed, Bleeding } type;
+	enum Type { Dazed, Bleeding, Petrified } type;
 	int remainingTurns;
 };
 
@@ -43,7 +43,7 @@ public:
 protected:
 	int health_, maxHealth_;
 	bool isAlive_;
-	bool isDazed_;
+	bool isDazed_, isPetrified_;
 	string type_;
 	bool ignoreDodge_ = false;
 	vector<Debuff> debuffs_;

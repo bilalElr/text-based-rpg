@@ -15,6 +15,7 @@ int Entity::getnEntities()
 void Entity::applyDebuff(Debuff::Type type, int turns)
 {
     if (type == Debuff::Dazed) { isDazed_ = true; }
+    if (type == Debuff::Petrified) { isPetrified_ = true; }
     debuffs_.push_back(Debuff{ type, turns });
 }
 
@@ -25,19 +26,25 @@ void Entity::processDebuffs()
         Debuff& deb = debuffs_[i];
         switch (deb.type) {
         case Debuff::Bleeding:
+            setIgnoreDodge(true);
             takeDamage(20);
-            cout << endl << type_ << " takes 20 bleeding damage!\n";
+            setIgnoreDodge(false);
             break;
 
         case Debuff::Dazed:
             cout << type_ << " is dazed, they are 50% more likely to miss an attack!\n";
             break;
+        case Debuff::Petrified:
+            cout << endl << type_ << " is petrified and cannot be used for " << deb.remainingTurns << " turn(s)!\n";
         }
         deb.remainingTurns--;
 
         if (deb.remainingTurns <= 0) {
             if (deb.type == Debuff::Dazed) {
                 isDazed_ = false;
+            }
+            if (deb.type == Debuff::Petrified) {
+                isPetrified_ = false;
             }
             debuffs_.erase(debuffs_.begin() + i);
         }
@@ -52,7 +59,8 @@ Entity::Entity(const string& type, int health, int maxHealth) :
     health_(health),
     maxHealth_(maxHealth),
     isAlive_(true),
-    isDazed_(false)
+    isDazed_(false),
+    isPetrified_(false)
 {
     nEntities_++;
 }
@@ -103,6 +111,9 @@ string Entity::getDebuff() const
 	if (hasDebuff(Debuff::Bleeding)) {
 		statusCode += 2;
 	}
+    if (hasDebuff(Debuff::Petrified)) {
+        statusCode += 5;
+    }
 	if (!isAlive_) {
 		return "Downed";
 	}
@@ -119,6 +130,14 @@ string Entity::getDebuff() const
 	case 3:
 		status = "Dazed & Bleeding";
 		break;
+    case 5:
+        status = "Petrified";
+        break;
+    case 6:
+        status = "Dazed & Petrified";
+        break;
+    case 7:
+        status = "Bleeding & Petrified";
 	}
 	return status;
 }
@@ -154,11 +173,16 @@ void Entity::takeDamage(int dmg)
     if (dmg >= health_) {
 		health_ = 0;
 		isAlive_ = false;
+        cout << endl << getType() << " takes " << dmg << " damage.";
 		cout << "\n" << getType() << " has been defeated!\n";
     }
     else {
 		health_ -= dmg;
-		cout << endl << getType() << " takes " << dmg << " damage, remaining HP: " << health_ << endl;
+        cout << endl << getType() << " takes " << dmg << " damage ";
+        if (hasDebuff(Debuff::Bleeding)) {
+            cout << "(from bleeding).\n";
+        }
+        cout << "\nremaining HP: " << health_ << endl;
     }
 }
 
@@ -171,7 +195,7 @@ void Entity::revive(int healthDivider)
 
 bool Entity::dodged()
 {
-    if (isDazed_) { return false; }
+    if (isDazed_ || isPetrified_) { return false; }
 	return randomNumberGenerator(1, 100) <= 10;
 }
 

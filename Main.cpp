@@ -15,6 +15,18 @@
 
 using namespace std;
 
+//check if overhealing is fixed   DONE
+// make prompts display again after an invalid input
+// add AOE attacks
+//color code for attack summary, enemy turn, player turn
+//try .txt for checkpoint
+//increase enemy damage			DONE
+//make enemies have ults that inflict petrify debuff		DONE
+//add numbers to pick chars and enemies instead of constantly writing them out
+//do not apply debuffs if an attack is dodged			DONE
+//make dazed work			DONE
+//items?
+
 Display display;
 vector<unique_ptr<Character>> party;
 vector<unique_ptr<Enemy>> enemy;
@@ -41,7 +53,7 @@ int main() {
 		display.pressEnter();
 	} while (!bm.battleOver());
 
-	cout << "Barely sweating, you move forward, eager to keep killing whatever creatures dare to challenge you.\n";
+	cout << "Barely sweating, you move forward, eager to keep slaying whatever creatures dare to challenge you.\n";
 	cout << "The night approaches, the moon glowing and being the only source of light to guide you on your path.\n";
 	cout << "All of a sudden, you hear a howl coming from a nearby cave. You're greeted by a large werewolf, "
 		<< "teeth and fangs sharper than your blades...\n";
@@ -49,7 +61,7 @@ int main() {
 		<< "Your next battle begins!\n";	
 	display.pressEnter();
 
-	//vector<unique_ptr<Character>> checkpoint = bm.makeCheckpoint(bm.getParty());
+	//vector<unique_ptr<Character>> checkpoint = bm.makeCheckpoint(party);
 
 	do {
 		bm.startEnemies({ {"Werewolf", 1}, {"Goblin", 2} });

@@ -3,7 +3,7 @@
 using namespace std;
 
 Troll::Troll(int ultDmg):
-	Enemy(1000, 1000, "Troll", false, 40, 50), ultDmg_(ultDmg)
+	Enemy(1000, 1000, false, "Troll", false, 40, 50, 80), ultDmg_(ultDmg)
 {
 }
 
@@ -45,4 +45,18 @@ string Troll::getAttack2() const
 int Troll::getUltDmg() const
 {
 	return ultDmg_;
+}
+
+int Troll::getEnemyUlt() const
+{
+	return 0;
+}
+
+string Troll::getUltDesc() const
+{
+	return string();
+}
+
+void Troll::enemyUlt(Character& c)
+{
 }

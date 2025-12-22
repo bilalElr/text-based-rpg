@@ -32,7 +32,7 @@ public:
 	bool allCharactersDead() const;
 	void healParty(int amount);
 
-	//vector<unique_ptr<Character>> makeCheckpoint(vector<unique_ptr<Character>>& currentParty);
+	//vector<unique_ptr<Character>> makeCheckpoint(const vector<unique_ptr<Character>>& currentParty);
 
 	const vector<unique_ptr<Character>>& getParty() const;
 	const vector<unique_ptr<Enemy>>& getEnemyParty() const;
@@ -51,7 +51,8 @@ private:
 	void processDebuffsEnemy();
 	void ProcessCooldowns();
 	int getPlayerAttackChoice(Character* c, int turnCounter);
-	bool attickWillHit(Entity* attacker, Entity* target);
+	bool attackCharWillHit(Character* attacker);
+	bool attackEnemyCharWillHit(Enemy* enemy);
 	void executePlayerAttack(Character* activeChar, Enemy* target, int attackChoice);
 	void removeDeadEnemies();
 	void enemyAttack(Enemy* e, Character* c);
@@ -86,10 +87,14 @@ T* BattleManager::chooseAliveEntity(const vector<unique_ptr<T>>& group, const st
 		else if constexpr (is_same_v<T, Enemy>) {
 			choice = takeEnemyInput();
 		}
-      
+        
         for (const unique_ptr<T>& t : group) {
             if (t->getType() == choice && t->getAlive()) {
 				selected = t.get();
+				if (t->hasDebuff(Debuff::Petrified)) {
+					selected = nullptr;
+					break;
+				}
                 break;
             }
         }
