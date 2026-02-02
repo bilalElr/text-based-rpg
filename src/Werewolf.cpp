@@ -1,4 +1,4 @@
-#include "werewolf.h"
+#include "Werewolf.h"
 
 using namespace std;
 
